@@ -1,9 +1,10 @@
+import { PageWrapper } from "@/components/PageWrapper";
 import { Outlet } from "react-router";
 
 export const RootLayout = () => {
   return (
-    <div>
+    <PageWrapper className="data-root-layout min-h-screen">
       <Outlet />
-    </div>
+    </PageWrapper>
   );
 };

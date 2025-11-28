@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 interface NavState {
   isOpen: boolean;
@@ -9,7 +9,7 @@ const initialState: NavState = {
 };
 
 export const navSlice = createSlice({
-  name: 'nav',
+  name: "nav",
   initialState,
   reducers: {
     openNav: (state) => {

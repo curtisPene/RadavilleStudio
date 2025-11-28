@@ -13,33 +13,22 @@ interface PageWrapperProps {
  * Provides consistent responsive padding and max-width constraints across all pages
  *
  * Responsive behavior:
- * - 320px (mobile): padding-x spacing-md
- * - 640px (sm): padding-x spacing-lg
- * - 768px (md): padding-x spacing-xl
- * - 1024px (lg): padding-x spacing-2xl
- * - 1280px (xl): padding-x spacing-3xl
+ * - 320px (mobile): px-md (1rem)
+ * - 640px (sm): px-lg (1.5rem)
+ * - 768px (md): px-xl (2rem)
+ * - 1024px (lg): px-2xl (2.5rem)
+ * - 1280px (xl): px-3xl (3rem)
  * - Max-width: 1200px (centered)
- *
- * @example
- * export function HomePage() {
- *   return (
- *     <Wrapper>
- *       <Hero />
- *       <Portfolio />
- *       <Contact />
- *     </Wrapper>
- *   )
- * }
  */
-export const PageWrapper = memo(function Wrapper({
+export const PageWrapper = memo(function PageWrapper({
   children,
   className,
 }: PageWrapperProps) {
   const wrapperClasses = cn(
     // Container structure
     "w-full max-w-[1200px] mx-auto",
-    // Responsive horizontal padding
-    "px-spacing-md sm:px-spacing-lg md:px-spacing-xl lg:px-spacing-2xl xl:px-spacing-3xl",
+    // Responsive horizontal padding (custom theme variables)
+    "px-md sm:px-lg md:px-xl lg:px-2xl xl:px-3xl",
     // Custom overrides
     className
   );

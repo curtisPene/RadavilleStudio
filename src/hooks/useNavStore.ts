@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../app/AppStore';
-import { openNav, closeNav, toggleNav } from '../stores/navSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { type RootState } from "../app/AppStore";
+import { openNav, closeNav, toggleNav } from "../stores/navSlice";
 
 export const useNavStore = () => {
   const isOpen = useSelector((state: RootState) => state.nav.isOpen);

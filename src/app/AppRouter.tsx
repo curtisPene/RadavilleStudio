@@ -4,7 +4,16 @@ import { RootLayout } from "./RootLayout";
 
 export const AppRouter = () => {
   const router = createBrowserRouter([
-    { path: "/", element: <RootLayout />, children: [] },
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        {
+          index: true,
+          element: <div>Home</div>,
+        },
+      ],
+    },
   ]);
 
   return <RouterProvider router={router} />;

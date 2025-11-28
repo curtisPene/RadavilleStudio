@@ -137,79 +137,81 @@ export const Typography = ({
   return <Element className={styles} {...props}>{children}</Element>;
 };
 
+type VariantProps = Omit<TypographyProps, "variant">;
+
 // Display Components
-export const DisplayLarge = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="display-large" {...props} />
+export const DisplayLarge: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="display-large" {...props}>{children}</Typography>
 );
 
-export const DisplayMedium = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="display-medium" {...props} />
+export const DisplayMedium: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="display-medium" {...props}>{children}</Typography>
 );
 
-export const DisplaySmall = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="display-small" {...props} />
+export const DisplaySmall: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="display-small" {...props}>{children}</Typography>
 );
 
 // Heading Components
-export const H1 = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="heading-1" {...props} />
+export const H1: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="heading-1" {...props}>{children}</Typography>
 );
 
-export const H2 = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="heading-2" {...props} />
+export const H2: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="heading-2" {...props}>{children}</Typography>
 );
 
-export const H3 = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="heading-3" {...props} />
+export const H3: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="heading-3" {...props}>{children}</Typography>
 );
 
-export const H4 = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="heading-4" {...props} />
+export const H4: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="heading-4" {...props}>{children}</Typography>
 );
 
 // Body Text Components
-export const BodyLarge = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="body-large" {...props} />
+export const BodyLarge: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="body-large" {...props}>{children}</Typography>
 );
 
-export const BodyMedium = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="body-medium" {...props} />
+export const BodyMedium: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="body-medium" {...props}>{children}</Typography>
 );
 
-export const BodySmall = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="body-small" {...props} />
+export const BodySmall: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="body-small" {...props}>{children}</Typography>
 );
 
-export const Paragraph = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="body-medium" {...props} />
+export const Paragraph: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="body-medium" {...props}>{children}</Typography>
 );
 
 // Label Components
-export const LabelLarge = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="label-large" {...props} />
+export const LabelLarge: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="label-large" {...props}>{children}</Typography>
 );
 
-export const LabelMedium = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="label-medium" {...props} />
+export const LabelMedium: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="label-medium" {...props}>{children}</Typography>
 );
 
-export const LabelSmall = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="label-small" {...props} />
+export const LabelSmall: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="label-small" {...props}>{children}</Typography>
 );
 
-export const Label = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="label-medium" {...props} />
+export const Label: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="label-medium" {...props}>{children}</Typography>
 );
 
 // Other Components
-export const Caption = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="caption" {...props} />
+export const Caption: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="caption" {...props}>{children}</Typography>
 );
 
-export const Overline = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="overline" {...props} />
+export const Overline: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="overline" {...props}>{children}</Typography>
 );
 
-export const Text = (props: Omit<TypographyProps, "variant">) => (
-  <Typography variant="body-medium" as="span" {...props} />
+export const Text: React.FC<VariantProps> = ({ children, ...props }) => (
+  <Typography variant="body-medium" as="span" {...props}>{children}</Typography>
 );

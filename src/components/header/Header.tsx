@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <header
       data-app-header
-      className="flex flex-row items-center justify-between pt-4"
+      className="flex flex-row items-center justify-between p-4"
     >
       <WordMark />
       <BrandMark />

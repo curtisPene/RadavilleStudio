@@ -27,6 +27,7 @@ interface TypographyProps {
   className?: string;
   children: ReactNode;
   as?: ElementType;
+  [key: string]: any;
 }
 
 const variantStyles: Record<
@@ -36,17 +37,17 @@ const variantStyles: Record<
   // Display variants - for hero sections and attention-grabbing text
   "display-large": {
     style:
-      "text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-none",
+      "text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-none",
     defaultElement: "h1",
   },
   "display-medium": {
     style:
-      "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-none",
+      "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-none",
     defaultElement: "h1",
   },
   "display-small": {
     style:
-      "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-tight",
+      "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-tight leading-tight",
     defaultElement: "h1",
   },
 
@@ -73,18 +74,15 @@ const variantStyles: Record<
 
   // Body text variants
   "body-large": {
-    style:
-      "text-base sm:text-lg md:text-lg lg:text-lg leading-relaxed text-gray-700",
+    style: "text-base sm:text-lg md:text-lg lg:text-lg leading-relaxed",
     defaultElement: "p",
   },
   "body-medium": {
-    style:
-      "text-sm sm:text-base md:text-base lg:text-base leading-relaxed text-gray-600",
+    style: "text-sm sm:text-base md:text-base lg:text-base leading-relaxed",
     defaultElement: "p",
   },
   "body-small": {
-    style:
-      "text-xs sm:text-sm md:text-sm lg:text-sm leading-relaxed text-gray-500",
+    style: "text-xs sm:text-sm md:text-sm lg:text-sm leading-relaxed",
     defaultElement: "p",
   },
 
@@ -104,11 +102,11 @@ const variantStyles: Record<
 
   // Other variants
   caption: {
-    style: "text-xs sm:text-sm leading-snug text-gray-500",
+    style: "text-xs sm:text-sm leading-snug",
     defaultElement: "small",
   },
   overline: {
-    style: "text-xs font-semibold uppercase tracking-widest text-gray-400",
+    style: "text-xs font-semibold uppercase tracking-widest",
     defaultElement: "span",
   },
 };
@@ -118,9 +116,11 @@ const variantStyles: Record<
  * Responsive text element with type scaling starting from 320px (mobile-first)
  * Uses semantic HTML elements by default
  *
+ * Color is controlled via className prop - no hardcoded text colors
+ *
  * @example
  * <Typography variant="heading-1">Main Heading</Typography>
- * <Typography variant="body-medium" className="text-blue-500">Custom paragraph</Typography>
+ * <Typography variant="body-medium" className="text-about-page-fill">Custom paragraph</Typography>
  * <Typography variant="label-medium" as="label">Form Label</Typography>
  */
 export const Typography = ({
@@ -128,12 +128,13 @@ export const Typography = ({
   className,
   children,
   as,
+  ...props
 }: TypographyProps) => {
   const config = variantStyles[variant];
   const Element = (as as ElementType) || config.defaultElement;
   const styles = cn(config.style, className);
 
-  return <Element className={styles}>{children}</Element>;
+  return <Element className={styles} {...props}>{children}</Element>;
 };
 
 // Display Components

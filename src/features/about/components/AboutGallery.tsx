@@ -28,7 +28,12 @@ export const GalleryItem: FC<AboutGalleryProps> = ({
       <BodySmall className="text-about-text opacity-55 mb-(--spacing-sm)">
         Fig {`${images.length < 10 ? 0 : ""}${index}`}
       </BodySmall>
-      <img src={src} alt={alt} loading="lazy" />
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="w-full h-auto object-cover"
+      />
     </section>
   );
 };
@@ -92,6 +97,7 @@ export const AboutGallery = () => {
             }
           );
         });
+        ScrollTrigger.refresh();
       });
 
       return () => {

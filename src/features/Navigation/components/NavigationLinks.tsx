@@ -1,4 +1,4 @@
-import { closeNav } from "@/stores/navSlice";
+import { setCloseRequest } from "@/stores/navSlice";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -33,11 +33,10 @@ const NavItem: FC<NavItemProps> = ({ children, onClick }) => {
 
 export const NavigationLinks = () => {
   const navRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
   const isClickingRef = useRef(true);
   const splitCharsMapRef = useRef<Map<HTMLElement, SplitText>>(new Map());
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useGSAP(
     () => {
@@ -153,9 +152,7 @@ export const NavigationLinks = () => {
                   splitChars.revert();
                   isClickingRef.current = false;
                   navigate(path);
-                  setTimeout(() => {
-                    dispatch(closeNav());
-                  }, 300);
+                  dispatch(setCloseRequest());
                 },
               });
           }}

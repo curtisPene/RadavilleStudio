@@ -3,6 +3,7 @@ import { AppRouter } from "./AppRouter";
 import { ReactLenis, type LenisRef } from "lenis/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 function App() {
   const lenisRef = useRef<LenisRef>(null);
@@ -16,6 +17,8 @@ function App() {
 
     return () => gsap.ticker.remove(update);
   }, []);
+
+  useGSAP(() => {});
 
   return (
     <ReactLenis ref={lenisRef} root options={{ lerp: 0.1, duration: 1.5 }}>

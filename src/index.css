@@ -23,6 +23,10 @@
   --color-about-bg: #995435;
   --color-curation-bg: #f7f6ef;
   --color-curation-text: #000000;
+  --color-carousel-bg: #311512;
+  --color-carousel-text: #f1e6d2;
+  --color-contact-bg: #d1c9be;
+  --color-contact-text: #000000;
 
   --breakpoint-sm-425: 425px;
 }

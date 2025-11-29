@@ -24,16 +24,19 @@ export const GalleryItem: FC<AboutGalleryProps> = ({
   alt = "",
 }) => {
   return (
-    <section data-section-about-gallery-item data-animate-gallery-item>
-      <BodySmall className="text-about-text opacity-55 mb-(--spacing-sm)">
-        Fig {`${images.length < 10 ? 0 : ""}${index}`}
-      </BodySmall>
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        className="w-full h-auto object-cover"
-      />
+    <section data-section-about-gallery-item>
+      <div data-animate-gallery-item>
+        <BodySmall className="text-about-text opacity-55 mb-(--spacing-sm)">
+          Fig {`${images.length < 10 ? 0 : ""}${index}`}
+        </BodySmall>
+
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="w-full aspect-149/197 object-cover"
+        />
+      </div>
     </section>
   );
 };

@@ -5,7 +5,7 @@ import { AboutServices } from "../components/AboutServices";
 
 export const AboutPage = () => {
   return (
-    <PageWrapper data-about-page className="bg-about-">
+    <PageWrapper data-about-page className="bg-about-bg">
       <AboutHero />
       <AboutGallery />
       <AboutServices />

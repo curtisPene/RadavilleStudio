@@ -35,28 +35,63 @@ export const GalleryItem: FC<AboutGalleryProps> = ({
 
 export const AboutGallery = () => {
   const scope = useRef<HTMLDivElement>(null);
-  useGSAP(
-    () => {
+
+  const waitForImages = (): Promise<void> => {
+    return new Promise((resolve) => {
       const items = scope.current?.querySelectorAll(
-        "[data-animate-gallery-item]"
+        "[data-animate-gallery-item] img"
       );
 
-      items?.forEach((galleryItem) => {
-        gsap.fromTo(
-          galleryItem,
-          {
-            opacity: 0,
-          },
-          {
-            opacity: 1,
-            duration: 1.2,
-            ease: "power4.inOut",
-            scrollTrigger: {
-              trigger: galleryItem,
-              start: "top 90%",
-            },
-          }
+      if (!items || items.length === 0) {
+        resolve();
+        return;
+      }
+
+      let loadedCount = 0;
+
+      const checkAllLoaded = () => {
+        loadedCount++;
+        if (loadedCount === items.length) {
+          resolve();
+        }
+      };
+
+      Array.from(items).forEach((img) => {
+        const imgElement = img as HTMLImageElement;
+        if (imgElement.complete) {
+          checkAllLoaded();
+        } else {
+          imgElement.onload = checkAllLoaded;
+          imgElement.onerror = checkAllLoaded;
+        }
+      });
+    });
+  };
+
+  useGSAP(
+    () => {
+      waitForImages().then(() => {
+        const items = scope.current?.querySelectorAll(
+          "[data-animate-gallery-item]"
         );
+
+        items?.forEach((galleryItem) => {
+          gsap.fromTo(
+            galleryItem,
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 1.2,
+              ease: "power4.inOut",
+              scrollTrigger: {
+                trigger: galleryItem,
+                start: "top 90%",
+              },
+            }
+          );
+        });
       });
 
       return () => {
@@ -65,6 +100,7 @@ export const AboutGallery = () => {
     },
     { scope: scope }
   );
+
   return (
     <div
       ref={scope}

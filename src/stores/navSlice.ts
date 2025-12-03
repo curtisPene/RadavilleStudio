@@ -1,38 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface NavState {
-  isOpen: boolean;
-  isOpening: boolean;
-  isClosing: boolean;
+export interface INavState {
+  navIsOpen: boolean;
 }
 
-const initialState: NavState = {
-  isOpen: false,
-  isOpening: false,
-  isClosing: false,
+const initialState: INavState = {
+  navIsOpen: false,
 };
 
 export const navSlice = createSlice({
   name: "nav",
   initialState,
   reducers: {
-    setOpenRequest: (state) => {
-      state.isOpening = true;
-    },
-    setCloseRequest: (state) => {
-      state.isClosing = true;
-    },
     openNav: (state) => {
-      state.isOpening = false;
-      state.isOpen = true;
+      state.navIsOpen = true;
     },
     closeNav: (state) => {
-      state.isClosing = false;
-      state.isOpen = false;
+      state.navIsOpen = false;
     },
   },
 });
 
-export const { openNav, closeNav, setOpenRequest, setCloseRequest } =
-  navSlice.actions;
+export const { openNav, closeNav } = navSlice.actions;
 export default navSlice.reducer;

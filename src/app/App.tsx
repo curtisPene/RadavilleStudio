@@ -4,6 +4,7 @@ import { ReactLenis, type LenisRef } from "lenis/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { AnimationProvider } from "@/stores/AnimationProvider";
 
 function App() {
   const lenisRef = useRef<LenisRef>(null);
@@ -23,7 +24,9 @@ function App() {
   return (
     <ReactLenis ref={lenisRef} root options={{ lerp: 0.1, duration: 1.5 }}>
       <AppStore>
-        <AppRouter />
+        <AnimationProvider>
+          <AppRouter />
+        </AnimationProvider>
       </AppStore>
     </ReactLenis>
   );

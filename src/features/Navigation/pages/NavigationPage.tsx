@@ -2,19 +2,45 @@ import { NavigationHeader } from "../components/NavigationHeader";
 import { NavigationLinks } from "../components/NavigationLinks";
 import { InfoSection } from "../components/InfoSection";
 import { NavigationFooter } from "../components/NavigationFooter";
+import { useLayoutEffect, useRef, type FC } from "react";
 import { useGSAP } from "@gsap/react";
-import { useRef, type FC } from "react";
-import gsap from "gsap";
+import { animationController } from "@/animation/controller/animation-controller";
+import { useNavStore } from "@/hooks/useNavStore";
+import { AnimationIds } from "@/types/AnimationIds";
+import { StateIds } from "@/types/StateIds";
+import {
+  navPageOpenAnimation,
+  navPageSettledAnimations,
+} from "../animations/NavPageAnimations";
 
 export const NavigationPage: FC = () => {
   const pageRef = useRef<HTMLDivElement>(null);
-  useGSAP(() => {
-    gsap.to(pageRef.current, {
-      y: 0,
-      duration: 1.2,
-      ease: "power4.inOut",
-    });
-  });
+  const { navIsOpen } = useNavStore();
+
+  useGSAP(
+    () => {
+      if (!pageRef.current) return;
+
+      const pageMountTimeline = navPageOpenAnimation(pageRef);
+
+      const pageSettledTimeline = navPageSettledAnimations(pageRef);
+
+      animationController.register(AnimationIds.NAV_OPEN, pageMountTimeline);
+
+      animationController.register(
+        AnimationIds.NAV_SETTLED,
+        pageSettledTimeline
+      );
+    },
+
+    { scope: pageRef }
+  );
+
+  useLayoutEffect(() => {
+    if (navIsOpen) {
+      animationController.gotoState(StateIds.NAV_OPEN);
+    }
+  }, [navIsOpen]);
 
   return (
     <div

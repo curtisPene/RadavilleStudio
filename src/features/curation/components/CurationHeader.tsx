@@ -1,5 +1,4 @@
 import { BodySmall, DisplayMedium } from "@/components/Typography";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { useRef } from "react";
@@ -8,27 +7,7 @@ gsap.registerPlugin(SplitText);
 
 export const CurationHeader = () => {
   const ref = useRef<HTMLDivElement>(null);
-  useGSAP(
-    async () => {
-      if (!ref.current) return;
-      await document.fonts.ready;
 
-      const splitHeader = new SplitText(
-        ref.current.querySelector("[data-animate-display]"),
-        { type: "lines", mask: "lines" }
-      );
-      const splitBody = new SplitText(
-        ref.current.querySelector("[data-animate-body]"),
-        { type: "lines", mask: "lines" }
-      );
-      gsap.fromTo(
-        [splitHeader.lines, splitBody.lines],
-        { y: 100 },
-        { y: 0, duration: 1.2, ease: "power4.inOut", stagger: 0.1 }
-      );
-    },
-    { scope: ref }
-  );
   return (
     <div ref={ref} data-curation-header>
       <DisplayMedium

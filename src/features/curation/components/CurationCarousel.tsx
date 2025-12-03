@@ -7,11 +7,10 @@ import image6 from "@/assets/images/curation/image-6.avif";
 import image7 from "@/assets/images/curation/image-7.avif";
 import image8 from "@/assets/images/curation/image-8.avif";
 import { cn } from "@/lib/cn";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
@@ -43,57 +42,6 @@ const CarouselItem = ({ src, alt, index }: CarouselItemParams) => {
 export const CurationCarousel = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
-  const xPos = useRef(0); // current smoothed position
-  const targetX = useRef(0); // accumulates deltaX
-
-  const [isAnimating, setIsAnimating] = useState(true);
-
-  useGSAP(
-    () => {
-      if (!carouselRef.current || !trackRef.current) return;
-
-      const track = trackRef.current;
-      const scrollWidth = track.scrollWidth / 2;
-      const setX = gsap.quickSetter(track, "x", "px");
-      const wrap = gsap.utils.wrap(-scrollWidth, 0);
-
-      gsap.set(track, { x: 600 });
-      gsap.to(track, {
-        x: 17,
-        duration: 1.2,
-        ease: "power4.inOUt",
-        onComplete: () => {
-          setIsAnimating(false);
-        },
-      });
-
-      if (isAnimating) return;
-
-      Observer.create({
-        target: track,
-        type: "scroll,touch,pointer",
-        onChangeX: (e) => {
-          targetX.current += e.deltaX; // negative to move content opposite drag
-        },
-        preventDefault: true,
-      });
-
-      // LERP toward targetX for smooth momentum
-      const tickerCallback = () => {
-        xPos.current += (targetX.current - xPos.current) * 0.015; // positive factor
-        setX(wrap(xPos.current));
-      };
-      gsap.ticker.add(tickerCallback);
-
-      return () => {
-        // Cleanup when component unmounts
-        Observer.getAll().forEach((observer) => observer.kill());
-        gsap.ticker.remove(tickerCallback);
-      };
-    },
-    { scope: carouselRef, dependencies: [isAnimating] }
-  );
 
   return (
     <div

@@ -4,8 +4,6 @@ import { BrandMark } from "./BrandMark";
 import { useNavStore } from "@/hooks/useNavStore";
 import { createPortal } from "react-dom";
 import { NavigationPage } from "@/features/Navigation/pages/NavigationPage";
-import { openNav } from "@/stores/navSlice";
-import { useDispatch } from "react-redux";
 export interface HeaderProps {
   fillColor: string;
   backgroundColor: string;
@@ -13,9 +11,7 @@ export interface HeaderProps {
 
 export const Header = ({ fillColor, backgroundColor }: HeaderProps) => {
   const target = document.getElementById("portal-root")!;
-  const dispatch = useDispatch();
-  const { isOpen } = useNavStore();
-
+  const { navIsOpen, openNav } = useNavStore();
   return (
     <>
       <header
@@ -25,11 +21,15 @@ export const Header = ({ fillColor, backgroundColor }: HeaderProps) => {
       >
         <WordMark fill={fillColor} />
         <BrandMark fill={fillColor} />
-        <button onClick={() => dispatch(openNav())}>
+        <button
+          onClick={() => {
+            openNav();
+          }}
+        >
           <MenuIcon stroke={fillColor} />
         </button>
       </header>
-      {isOpen && createPortal(<NavigationPage />, target)}
+      {navIsOpen && createPortal(<NavigationPage />, target)}
     </>
   );
 };

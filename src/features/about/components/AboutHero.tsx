@@ -1,66 +1,8 @@
 import { useRef } from "react";
 import { BodySmall, DisplayLarge } from "@/components/Typography";
-import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/SplitText";
-import gsap from "gsap";
-
-gsap.registerPlugin(SplitText);
 
 export const AboutHero = () => {
   const ref = useRef<HTMLElement>(null);
-
-  useGSAP(
-    async () => {
-      if (!ref.current) return;
-      await document.fonts.ready;
-      const title = ref.current.querySelector("[data-animate-about-title]");
-      const content = ref.current.querySelector(
-        "[data-animate-about-description]"
-      );
-      const label = ref.current.querySelector("[data-animate-about-label]");
-
-      const splitTitle = new SplitText(title, { type: "lines", mask: "lines" });
-      const splitContent = new SplitText(content, {
-        type: "lines",
-        mask: "lines",
-      });
-      const splitLabel = new SplitText(label, { type: "lines", mask: "lines" });
-
-      const tl = gsap
-        .timeline()
-        .fromTo(
-          splitTitle.lines,
-          {
-            y: 100,
-          },
-          { y: 0, duration: 1.2, ease: "power4.inOut" }
-        )
-        .fromTo(
-          splitLabel.lines,
-          {
-            y: 100,
-          },
-          { y: 0, duration: 0.5, ease: "power4.out" },
-          "-=0.5"
-        )
-        .fromTo(
-          splitContent.lines,
-          {
-            y: 100,
-          },
-          { y: 0, duration: 0.5, stagger: 0.05, ease: "power4.out" },
-          "<"
-        );
-
-      return () => {
-        tl.revert();
-        splitTitle.revert();
-        splitContent.revert();
-        splitLabel.revert();
-      };
-    },
-    { scope: ref }
-  );
 
   return (
     <section ref={ref} data-section-about data-testid-about>

@@ -1,23 +1,23 @@
 import { WordMark } from "@/components/header/WordMark";
-import { setCloseRequest } from "@/stores/navSlice";
+import { useNavStore } from "@/hooks/useNavStore";
 import { XIcon } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
+import { useRef } from "react";
 
 export const NavigationHeader = () => {
-  const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const headerRef = useRef<HTMLDivElement>(null);
+  const { closeNav } = useNavStore();
+
   return (
     <div
+      ref={headerRef}
       data-navigation-header
-      className="flex flex-row items-center justify-between"
+      data-animate-navigation-header
+      className="flex flex-row items-center justify-between opacity-0"
     >
       <WordMark fill="white" />
       <button
         onClick={() => {
-          navigate(pathname);
-          dispatch(setCloseRequest());
+          closeNav();
         }}
       >
         <XIcon stroke="white" />

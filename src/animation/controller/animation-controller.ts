@@ -1,5 +1,6 @@
 import type { AnimationId } from "@/types/AnimationIds";
 import type { StateId } from "@/types/StateIds";
+import gsap from "gsap";
 
 type TimelineAction = "play" | "pause" | "kill" | "reverse";
 
@@ -24,7 +25,9 @@ export class AnimationController {
     this.flushQueue();
   };
 
-  registerBatch = (timelines: Array<{ id: AnimationId; timeline: gsap.core.Timeline }>) => {
+  registerBatch = (
+    timelines: Array<{ id: AnimationId; timeline: gsap.core.Timeline }>
+  ) => {
     timelines.forEach(({ id, timeline }) => {
       this.timelines.set(id, timeline);
     });
@@ -85,7 +88,6 @@ export class AnimationController {
   gotoState(stateKey: StateId) {
     const timelineIds = this.stateMap.get(stateKey);
     if (!timelineIds) {
-      console.log(`State ${stateKey} not found`);
       return;
     }
     timelineIds.forEach((id) => {

@@ -6,7 +6,6 @@ gsap.registerPlugin(SplitText);
 export const createNavLinksEntranceAnimation = (
   linksComponent: HTMLDivElement
 ) => {
-  const tl = gsap.timeline({ paused: true });
   const links = linksComponent.querySelectorAll("[data-nav-item]");
 
   const splitText = new SplitText(links, {
@@ -14,6 +13,7 @@ export const createNavLinksEntranceAnimation = (
     mask: "lines",
   });
 
+  const tl = gsap.timeline({ paused: true });
   tl.fromTo(
     splitText.lines,
     { y: "100%" },
@@ -23,5 +23,6 @@ export const createNavLinksEntranceAnimation = (
       ease: "power4.inOut",
     }
   );
+
   return tl;
 };

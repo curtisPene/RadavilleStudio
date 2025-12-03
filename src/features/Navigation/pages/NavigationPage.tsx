@@ -22,15 +22,12 @@ export const NavigationPage: FC = () => {
       if (!pageRef.current) return;
 
       const pageMountTimeline = navPageOpenAnimation(pageRef);
-
       const pageSettledTimeline = navPageSettledAnimations(pageRef);
 
-      animationController.register(AnimationIds.NAV_OPEN, pageMountTimeline);
-
-      animationController.register(
-        AnimationIds.NAV_SETTLED,
-        pageSettledTimeline
-      );
+      animationController.registerBatch([
+        { id: AnimationIds.NAV_OPEN, timeline: pageMountTimeline },
+        { id: AnimationIds.NAV_SETTLED, timeline: pageSettledTimeline },
+      ]);
     },
 
     { scope: pageRef }
